@@ -39,6 +39,7 @@ export default function Register() {
         let resObj = await axios.post("https://blog-app-backend-1-5vj1.onrender.com/author-api/authors", formData);
         navigate('/login');
       }
+      
     } catch (err) {
 			console.log(err)
       setError(err.response?.data?.error || "Registration failed")
