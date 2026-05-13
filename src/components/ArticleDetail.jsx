@@ -31,7 +31,7 @@ function ArticleDetail() {
     const fetchArticle = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`http://localhost:4000/user-api/article/${id}`, {
+        const res = await axios.get(`https://blog-app-backend-1-5vj1.onrender.com/user-api/article/${id}`, {
           withCredentials: true,
         });
         setArticle(res.data.payload);
@@ -46,7 +46,7 @@ function ArticleDetail() {
 
   const onCommentSubmit = async (data) => {
     try {
-      const res = await axios.put('http://localhost:4000/user-api/articles', {
+      const res = await axios.put('https://blog-app-backend-1-5vj1.onrender.com/user-api/articles', {
         articleId: id,
         comment: data.comment
       }, { withCredentials: true });
@@ -74,7 +74,7 @@ function ArticleDetail() {
   const saveEdit = async (commentId) => {
     if (!editCommentText.trim()) return;
     try {
-      const res = await axios.put('http://localhost:4000/user-api/articles/comment', {
+      const res = await axios.put('https://blog-app-backend-1-5vj1.onrender.com/user-api/articles/comment', {
         articleId: id,
         commentId,
         comment: editCommentText
@@ -92,7 +92,7 @@ function ArticleDetail() {
   const deleteComment = async (commentId) => {
     if (!window.confirm("Are you sure you want to delete this comment?")) return;
     try {
-      const res = await axios.delete(`http://localhost:4000/user-api/articles/comment/${id}/${commentId}`, {
+      const res = await axios.delete(`https://blog-app-backend-1-5vj1.onrender.com/user-api/articles/comment/${id}/${commentId}`, {
         withCredentials: true
       });
       if (res.status === 200) {

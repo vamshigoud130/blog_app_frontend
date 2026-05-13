@@ -31,7 +31,7 @@ function AddArticle() {
         author: currentUser._id,
       };
 
-      const res = await axios.post('http://localhost:4000/author-api/articles', articleObj, {
+      const res = await axios.post('https://blog-app-backend-1-5vj1.onrender.com/author-api/articles', articleObj, {
         withCredentials: true
       });
 

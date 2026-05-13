@@ -11,7 +11,7 @@ export const authStore = create((set, get) => ({
     const { role, ...userCred } = userCredWithRole;
     try {
       set({ loading: true, error: null });
-      const res = await axios.post("http://localhost:4000/common-api/login", userCred, { withCredentials: true });
+      const res = await axios.post("https://blog-app-backend-1-5vj1.onrender.com/common-api/login", userCred, { withCredentials: true });
       console.log("Login Response:", res.data);
 
       set({
@@ -34,7 +34,7 @@ export const authStore = create((set, get) => ({
   logout: async () => {
     set({ loading: true, error: null });
     try {
-      await axios.get("http://localhost:4000/common-api/logout", { withCredentials: true });
+      await axios.get("https://blog-app-backend-1-5vj1.onrender.com/common-api/logout", { withCredentials: true });
     } catch (error) {
       console.error("Logout error:", error);
     } finally {
@@ -49,7 +49,7 @@ export const authStore = create((set, get) => ({
   verifyAuth:async()=>{
     try {
       set({loading:true,error:null})
-      const res = await axios.get("http://localhost:4000/common-api/check-auth", { withCredentials: true });
+      const res = await axios.get("https://blog-app-backend-1-5vj1.onrender.com/common-api/check-auth", { withCredentials: true });
       set({
         loading:false,
         error:null,

@@ -24,7 +24,7 @@ function UserProfile() {
     const fetchArticles = async () => {
       try {
         setLoading(true);
-        const res = await axios.get('http://localhost:4000/user-api/read-articles', { withCredentials: true });
+        const res = await axios.get('https://blog-app-backend-1-5vj1.onrender.com/user-api/read-articles', { withCredentials: true });
         setArticles(res.data.payload || []);
       } catch (err) {
         console.error('Error fetching articles:', err);

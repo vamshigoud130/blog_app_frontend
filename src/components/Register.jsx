@@ -31,12 +31,12 @@ export default function Register() {
     try {
       if (role === "USER") {
         // make request to user-api
-        let resObj = await axios.post("http://localhost:4000/user-api/users", formData);
+        let resObj = await axios.post("https://blog-app-backend-1-5vj1.onrender.com/user-api/users", formData);
         navigate('/login');
       }
       if (role === "AUTHOR") {
         // make request to author-api
-        let resObj = await axios.post("http://localhost:4000/author-api/authors", formData);
+        let resObj = await axios.post("https://blog-app-backend-1-5vj1.onrender.com/author-api/authors", formData);
         navigate('/login');
       }
     } catch (err) {

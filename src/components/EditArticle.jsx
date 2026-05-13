@@ -32,7 +32,7 @@ function EditArticle() {
     const fetchArticle = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`http://localhost:4000/user-api/article/${id}`, {
+        const res = await axios.get(`https://blog-app-backend-1-5vj1.onrender.com/user-api/article/${id}`, {
           withCredentials: true
         });
         const article = res.data.payload;
@@ -68,7 +68,7 @@ function EditArticle() {
         ...data
       };
 
-      const res = await axios.put('http://localhost:4000/author-api/articles', articleObj, {
+      const res = await axios.put('https://blog-app-backend-1-5vj1.onrender.com/author-api/articles', articleObj, {
         withCredentials: true
       });
 

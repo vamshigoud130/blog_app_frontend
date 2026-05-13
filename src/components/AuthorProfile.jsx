@@ -25,7 +25,7 @@ function AuthorProfile() {
     const fetchMyArticles = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`http://localhost:4000/author-api/articles/${currentUser._id}`, {
+        const res = await axios.get(`https://blog-app-backend-1-5vj1.onrender.com/author-api/articles/${currentUser._id}`, {
           withCredentials: true
         });
         setArticles(res.data.payload || []);
