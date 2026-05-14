@@ -91,12 +91,13 @@ function EditArticle() {
   const handleDeleteConfirm = async () => {
     try {
       setDeleting(true);
-      const res = await axios.delete(
+      const res = await axios.patch(
         `https://blog-app-backend-1-5vj1.onrender.com/author-api/articles/${id}`,
+        {},
         { withCredentials: true }
       );
 
-      if (res.status === 200) {
+      if (res.status === 201) {
         toast.success('Article deleted successfully!');
         navigate('/');
       }
@@ -169,15 +170,15 @@ function EditArticle() {
           >
             Update Article
           </button>
-
-          <button
-            type="button"
-            onClick={handleDeleteClick}
-            className="w-full px-4 py-2 mt-4 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
-          >
-            Delete Article
-          </button>
         </form>
+
+        <button
+          type="button"
+          onClick={handleDeleteClick}
+          className="w-full px-4 py-2 mt-4 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
+        >
+          Delete Article
+        </button>
 
         {/* Delete Confirmation Modal */}
         {showDeleteConfirm && (
