@@ -27,6 +27,8 @@ function EditArticle() {
   const { currentUser } = authStore();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -80,6 +82,35 @@ function EditArticle() {
       console.error('Error updating article:', err);
       toast.error(err.response?.data?.message || 'Failed to update article');
     }
+  };
+
+  const handleDeleteClick = () => {
+    setShowDeleteConfirm(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    try {
+      setDeleting(true);
+      const res = await axios.delete(
+        `https://blog-app-backend-1-5vj1.onrender.com/author-api/articles/${id}`,
+        { withCredentials: true }
+      );
+
+      if (res.status === 200) {
+        toast.success('Article deleted successfully!');
+        navigate('/');
+      }
+    } catch (err) {
+      console.error('Error deleting article:', err);
+      toast.error(err.response?.data?.message || 'Failed to delete article');
+    } finally {
+      setDeleting(false);
+      setShowDeleteConfirm(false);
+    }
+  };
+
+  const handleDeleteCancel = () => {
+    setShowDeleteConfirm(false);
   };
 
   if (loading) {
@@ -138,7 +169,43 @@ function EditArticle() {
           >
             Update Article
           </button>
+
+          <button
+            type="button"
+            onClick={handleDeleteClick}
+            className="w-full px-4 py-2 mt-4 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
+          >
+            Delete Article
+          </button>
         </form>
+
+        {/* Delete Confirmation Modal */}
+        {showDeleteConfirm && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg shadow-lg p-6 max-w-sm mx-4">
+              <h3 className="text-lg font-bold text-gray-800 mb-4">Delete Article</h3>
+              <p className="text-gray-600 mb-6">
+                Are you sure you want to delete this article? This action cannot be undone.
+              </p>
+              <div className="flex gap-4">
+                <button
+                  onClick={handleDeleteCancel}
+                  disabled={deleting}
+                  className="flex-1 px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition disabled:opacity-50"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleDeleteConfirm}
+                  disabled={deleting}
+                  className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition disabled:opacity-50"
+                >
+                  {deleting ? 'Deleting...' : 'Delete'}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
